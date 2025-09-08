@@ -56,6 +56,7 @@ Terminal B – start the app:
 
 
 Sample UI:
-<img width="1755" height="2272" alt="image" src="https://github.com/user-attachments/assets/0014dbc4-a044-46ff-94ea-573e2906be2d" />
+<img width="1755" height="2272" alt="image" src="https://github.com/user-attachments/assets/0675fc9c-69f2-4133-b2d8-770b5e70b5c9" />
+
 
 

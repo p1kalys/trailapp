@@ -41,7 +41,7 @@ export default function SecurityStep({ values, errors, setValues }) {
           </Form.Item>
         </Col>
 
-        <Col span={24}>
+        <Col span={28}>
           <Form.Item
             validateStatus={e.termsAccepted ? "error" : ""}
             help={e.termsAccepted}
@@ -63,7 +63,7 @@ export default function SecurityStep({ values, errors, setValues }) {
           </Form.Item>
         </Col>
 
-        <Col span={24}>
+        <Col span={28}>
           <Form.Item
             validateStatus={e.privacyAccepted ? "error" : ""}
             help={e.privacyAccepted}
@@ -85,7 +85,7 @@ export default function SecurityStep({ values, errors, setValues }) {
           </Form.Item>
         </Col>
 
-        <Col span={24}>
+        <Col span={28}>
           <Form.Item>
             <Checkbox
               checked={Boolean(v.marketingOptIn)}

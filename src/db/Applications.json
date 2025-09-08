@@ -1,0 +1,128 @@
+{
+  "applications": [
+    {
+      "id": "e3a7",
+      "personal": {
+        "firstName": "prakash",
+        "lastName": "jha",
+        "email": "pr@gmail.com",
+        "phone": "9823783467",
+        "dateOfBirth": "2011-02-01",
+        "ssn": "789289321"
+      },
+      "employment": {
+        "streetAddress": "123, Bandra",
+        "city": "Pune",
+        "state": "MH",
+        "zipcode": "543789",
+        "employmentStatus": "Employed"
+      },
+      "financial": {
+        "annualIncomeRange": "$10,000–$25,000",
+        "creditScoreRange": "Fair (580–669)",
+        "bankingRelationship": "Axis Bank"
+      },
+      "security": {
+        "password": "prakash@2001",
+        "confirm": "prakash@2001",
+        "termsAccepted": true,
+        "privacyAccepted": true,
+        "marketingOptIn": false
+      },
+      "submittedAt": "2025-09-08T01:45:35.275Z"
+    },
+    {
+      "id": "a6a0",
+      "personal": {
+        "firstName": "Viraj",
+        "lastName": "A",
+        "email": "vr@gmail.com",
+        "phone": "9829321234",
+        "dateOfBirth": "2007-06-11",
+        "ssn": "456789123"
+      },
+      "employment": {
+        "streetAddress": "Jay Nagar",
+        "city": "Baner",
+        "state": "MH",
+        "zipcode": "543102",
+        "employmentStatus": "Unemployed"
+      },
+      "financial": {
+        "annualIncomeRange": "$50,000–$100,000",
+        "creditScoreRange": "Good (670–739)",
+        "bankingRelationship": "HDFC"
+      },
+      "security": {
+        "password": "jay@123ink",
+        "confirm": "jay@123ink",
+        "termsAccepted": true,
+        "privacyAccepted": true,
+        "marketingOptIn": true
+      },
+      "submittedAt": "2025-09-08T01:50:52.476Z"
+    },
+    {
+      "id": "49fc",
+      "personal": {
+        "firstName": "ajay",
+        "lastName": "a",
+        "email": "aj@gmail.com",
+        "phone": "2983923123",
+        "dateOfBirth": "2006-06-08",
+        "ssn": "456789789"
+      },
+      "employment": {
+        "streetAddress": "Main St, Church road",
+        "city": "Jingar",
+        "state": "CH",
+        "zipcode": "456789",
+        "employmentStatus": "Unemployed"
+      },
+      "financial": {
+        "annualIncomeRange": "$25,000–$50,000",
+        "creditScoreRange": "Fair (580–669)",
+        "bankingRelationship": "ICICI"
+      },
+      "security": {
+        "password": "perks@123",
+        "confirm": "perks@123",
+        "termsAccepted": true,
+        "privacyAccepted": true,
+        "marketingOptIn": false
+      },
+      "submittedAt": "2025-09-08T01:59:58.255Z"
+    },
+    {
+      "id": "64e2",
+      "personal": {
+        "firstName": "John",
+        "lastName": "D",
+        "email": "hdoe@gmail.cp",
+        "phone": "9231493214",
+        "dateOfBirth": "2004-05-12",
+        "ssn": "321432543"
+      },
+      "employment": {
+        "streetAddress": "Main St, Santosh Nagar",
+        "city": "Kandre",
+        "state": "AP",
+        "zipcode": "523478",
+        "employmentStatus": "Employed"
+      },
+      "financial": {
+        "annualIncomeRange": "$25,000–$50,000",
+        "creditScoreRange": "Very Good (740–799)",
+        "bankingRelationship": "Other"
+      },
+      "security": {
+        "password": "johnd@123",
+        "confirm": "johnd@123",
+        "termsAccepted": true,
+        "privacyAccepted": true,
+        "marketingOptIn": false
+      },
+      "submittedAt": "2025-09-08T02:11:22.689Z"
+    }
+  ]
+}

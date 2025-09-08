@@ -1,7 +1,14 @@
 import { useMemo, useState } from "react";
 import { Box } from "@mui/material";
 import { Button } from "antd";
-import { ArrowLeft, ArrowRight, CreditCard, MapPin, Shield, User } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  CreditCard,
+  MapPin,
+  Shield,
+  User,
+} from "lucide-react";
 
 import PersonalStep from "./steps/PersonalStep";
 import EmploymentStep from "./steps/EmploymentStep";
@@ -18,31 +25,81 @@ import {
 import CardShell from "../../common/CardShell";
 import StepBar from "./StepBar";
 import PanelHeader from "../../common/PanelHeader";
-// import { createApplication } from "../../../services/applications"; // enable if using json-server
+import { createApplication } from "../../../services/FormService";
+import toast from "react-hot-toast";
 
 export default function LoanApplication() {
+  const [submitting, setSubmitting] = useState(false);
   const steps = useMemo(
     () => [
-      { key: "personal", icon: User, label: "Personal Information", schema: personalSchema },
-      { key: "employment", icon: MapPin, label: "Address & Employment", schema: employmentSchema },
-      { key: "financial", icon: CreditCard, label: "Financial Details", schema: financialSchema },
-      { key: "security", icon: Shield, label: "Account Security", schema: securitySchema },
+      {
+        key: "personal",
+        icon: User,
+        label: "Personal Information",
+        schema: personalSchema,
+      },
+      {
+        key: "employment",
+        icon: MapPin,
+        label: "Address & Employment",
+        schema: employmentSchema,
+      },
+      {
+        key: "financial",
+        icon: CreditCard,
+        label: "Financial Details",
+        schema: financialSchema,
+      },
+      {
+        key: "security",
+        icon: Shield,
+        label: "Account Security",
+        schema: securitySchema,
+      },
     ],
     []
   );
 
   const initialStore = useMemo(
     () => ({
-      personal: { firstName: "", lastName: "", email: "", phone: "", dateOfBirth: "", ssn: "" },
-      employment: { streetAddress: "", city: "", state: "", zipcode: "", employmentStatus: "" },
-      financial: { annualIncomeRange: "", creditScoreRange: "", bankingRelationship: "" },
-      security: { password: "", confirm: "", termsAccepted: false, privacyAccepted: false, marketingOptIn: false },
+      personal: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        dateOfBirth: "",
+        ssn: "",
+      },
+      employment: {
+        streetAddress: "",
+        city: "",
+        state: "",
+        zipcode: "",
+        employmentStatus: "",
+      },
+      financial: {
+        annualIncomeRange: "",
+        creditScoreRange: "",
+        bankingRelationship: "",
+      },
+      security: {
+        password: "",
+        confirm: "",
+        termsAccepted: false,
+        privacyAccepted: false,
+        marketingOptIn: false,
+      },
     }),
     []
   );
 
   const [store, setStore] = useState(initialStore);
-  const [errors, setErrors] = useState({ personal: {}, employment: {}, financial: {}, security: {} });
+  const [errors, setErrors] = useState({
+    personal: {},
+    employment: {},
+    financial: {},
+    security: {},
+  });
   const [current, setCurrent] = useState(0);
   const [completed, setCompleted] = useState(-1);
 
@@ -51,11 +108,13 @@ export default function LoanApplication() {
   const setStepValues = (stepKey, updater) => {
     setStore((prev) => ({
       ...prev,
-      [stepKey]: typeof updater === "function" ? updater(prev[stepKey]) : updater,
+      [stepKey]:
+        typeof updater === "function" ? updater(prev[stepKey]) : updater,
     }));
   };
 
-  const setStepErrorMap = (stepKey, map) => setErrors((prev) => ({ ...prev, [stepKey]: map || {} }));
+  const setStepErrorMap = (stepKey, map) =>
+    setErrors((prev) => ({ ...prev, [stepKey]: map || {} }));
 
   const handleNext = async () => {
     const stepKey = active.key;
@@ -68,41 +127,89 @@ export default function LoanApplication() {
 
   const handlePrev = () => setCurrent((c) => Math.max(c - 1, 0));
 
-  const handleSubmitAll = async () => {
-    // validate active
-    const currentKey = active.key;
-    const currentErrs = await validateWithYup(active.schema, store[currentKey]);
-    setStepErrorMap(currentKey, currentErrs);
-    if (Object.keys(currentErrs).length) return;
-
-    // validate all
+  const validateAllSteps = async () => {
     for (const s of steps) {
-      const e = await validateWithYup(s.schema, store[s.key]);
-      if (Object.keys(e).length) {
-        setStepErrorMap(s.key, e);
-        setCurrent(steps.indexOf(s));
+      const errs = await validateWithYup(s.schema, store[s.key]);
+      setStepErrorMap(s.key, errs);
+      if (Object.keys(errs).length) return { stepKey: s.key, errs };
+    }
+    return null;
+  };
+  const handleSubmitAll = async () => {
+    if (submitting) return;
+    setSubmitting(true);
+    try {
+      const currentKey = active.key;
+      const currentErrs = await validateWithYup(
+        active.schema,
+        store[currentKey]
+      );
+      setStepErrorMap(currentKey, currentErrs);
+      if (Object.keys(currentErrs).length) return;
+
+      const firstFail = await validateAllSteps();
+      if (firstFail) {
+        setCurrent(steps.findIndex((s) => s.key === firstFail.stepKey));
         return;
       }
-    }
 
-    const payload = { ...store };
-    // If using json-server:
-    // const saved = await createApplication(payload);
-    // console.log("Saved:", saved);
-    console.log("Submitting aggregated payload:", payload);
-    alert("Submitted! Check console for payload.");
+      const payload = { ...store };
+      const saved = await createApplication(payload);
+      console.log("Saved:", saved);
+      toast.success("Application submitted successfully!");
+
+      setCurrent(0);
+      setCompleted(-1);
+      setStore(initialStore);
+      setErrors({
+        personal: {},
+        employment: {},
+        financial: {},
+        security: {},
+      });
+    } catch (err) {
+      console.error("Submit failed:", err);
+      toast.error("Failed to submit application. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  // dropdown options
-  const incomeOptions = ["Below $10,000","$10,000–$25,000","$25,000–$50,000","$50,000–$100,000","$100,000–$250,000","Above $250,000"];
-  const creditOptions = ["Poor (300–579)","Fair (580–669)","Good (670–739)","Very Good (740–799)","Excellent (800–850)"];
-  const bankOptions = ["SBI","HDFC","ICICI","Axis Bank","Kotak","Bank of Baroda","Other"];
+  const incomeOptions = [
+    "Below $10,000",
+    "$10,000–$25,000",
+    "$25,000–$50,000",
+    "$50,000–$100,000",
+    "$100,000–$250,000",
+    "Above $250,000",
+  ];
+  const creditOptions = [
+    "Poor (300–579)",
+    "Fair (580–669)",
+    "Good (670–739)",
+    "Very Good (740–799)",
+    "Excellent (800–850)",
+  ];
+  const bankOptions = [
+    "SBI",
+    "HDFC",
+    "ICICI",
+    "Axis Bank",
+    "Kotak",
+    "Bank of Baroda",
+    "Other",
+  ];
 
   return (
     <Box className="mx-auto max-w-3xl p-4">
-      <StepBar steps={steps} current={current} completed={completed} className="mb-5" />
+      <StepBar
+        steps={steps}
+        current={current}
+        completed={completed}
+        className="mb-5"
+      />
 
-      <CardShell>
+      <CardShell className="mx-4">
         <PanelHeader active={active} />
         <div className="px-5 py-4">
           {active.key === "personal" && (
@@ -184,7 +291,7 @@ export default function LoanApplication() {
               }}
               className="hover:scale-[1.1]"
             >
-              Submit
+              {submitting ? "Submitting..." : "Submit"}
             </Button>
           )}
         </div>

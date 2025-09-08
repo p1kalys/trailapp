@@ -10,7 +10,7 @@ const Header = () => {
         <img
           src={Images.logo}
           alt="Logo"
-          className="h-24 w-auto sm:h-26 md:h-28 drop-shadow"
+          className="h-26 w-auto sm:h-28 md:h-30 drop-shadow"
           loading="eager"
           decoding="async"
         />

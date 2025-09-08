@@ -20,6 +20,10 @@ const personalSchema = yup.object({
     .date()
     .typeError("Enter a valid date")
     .max(new Date(), "Date of birth cannot be in the future")
+    .max(
+      new Date(new Date().setFullYear(new Date().getFullYear() - 18)),
+      "You must be at least 18 years old"
+    )
     .required("Date of birth is required"),
   ssn: yup
     .string()

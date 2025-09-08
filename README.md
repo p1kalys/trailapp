@@ -1,12 +1,58 @@
-# React + Vite
+# Loan Application (Multi‑Step Form)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A multi‑step loan application built with React, Ant Design, MUI, Tailwind utilities for layout accents, and Yup for per‑step validation. Data is submitted once at the end to a local JSON API powered by json-server.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Multi‑step flow with a segmented StepBar (solid color between circles; no color mixing).
+- Ant Design form fields (Input, Select, Checkbox) with Yup validation and inline errors.
+- Single final submission to a local JSON file using json-server.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React + Vite
+- Ant Design (components)
+- Tailwind (utility classes for spacing/rounding/shadows)
+- Yup (validation)
+- json-server (mock API)
+
+## Prerequisites
+
+- Node 18+ and npm
+- Ports available:
+  - 5173 (Vite dev server)
+  - 8080 (json-server API)
+
+## Setup
+
+After forking, clone the repo and run the following commands:
+
+1) Install dependencies
+- npm install
+
+2) Tailwind (if not already configured)
+- Ensure tailwind.config.js scans src and index.html.
+
+3) Create the mock database
+- db/Applications.json
+```
+{
+  "applications": []
+}
+```
+- This exposes a REST collection at /applications.
+
+## Running
+
+Terminal A – start the API:
+- npm run api
+- Endpoints:
+  - GET http://localhost:8080/applications
+  - POST http://localhost:8080/applications (persists to data/db.json)
+
+Terminal B – start the app:
+- npm run dev
+- Open http://localhost:5173
+
+
+Sample UI:

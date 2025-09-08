@@ -1,4 +1,4 @@
-import banner from "../assets/images/banner.png";
+import banner from "../assets/images/banner.jpg";
 import logo from "../assets/images/aplyka.png";
 
 export const Images = {

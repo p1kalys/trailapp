@@ -30,6 +30,7 @@ import toast from "react-hot-toast";
 
 export default function LoanApplication() {
   const [submitting, setSubmitting] = useState(false);
+  const [cardTransition, setCardTransition] = useState("");
   const steps = useMemo(
     () => [
       {
@@ -117,15 +118,28 @@ export default function LoanApplication() {
     setErrors((prev) => ({ ...prev, [stepKey]: map || {} }));
 
   const handleNext = async () => {
-    const stepKey = active.key;
-    const errs = await validateWithYup(active.schema, store[stepKey]);
-    setStepErrorMap(stepKey, errs);
-    if (Object.keys(errs).length) return;
-    setCompleted(Math.max(completed, current));
-    setCurrent((c) => Math.min(c + 1, steps.length - 1));
+    setCardTransition("slide-left");
+    setTimeout(async () => {
+      const stepKey = active.key;
+      const errs = await validateWithYup(active.schema, store[stepKey]);
+      setStepErrorMap(stepKey, errs);
+      if (Object.keys(errs).length) {
+        setCardTransition("");
+        return;
+      }
+      setCompleted(Math.max(completed, current));
+      setCurrent((c) => Math.min(c + 1, steps.length - 1));
+      setCardTransition("");
+    }, 300);
   };
 
-  const handlePrev = () => setCurrent((c) => Math.max(c - 1, 0));
+  const handlePrev = () => {
+    setCardTransition("slide-right");
+    setTimeout(() => {
+      setCurrent((c) => Math.max(c - 1, 0));
+      setCardTransition("");
+    }, 300);
+  };
 
   const validateAllSteps = async () => {
     for (const s of steps) {
@@ -201,7 +215,7 @@ export default function LoanApplication() {
   ];
 
   return (
-    <Box className="mx-auto max-w-3xl p-4">
+    <Box className="mx-auto max-w-3xl p-4 font-century-regular text-left">
       <StepBar
         steps={steps}
         current={current}
@@ -209,9 +223,17 @@ export default function LoanApplication() {
         className="mb-5"
       />
 
-      <CardShell className="mx-4">
+      <CardShell
+        className={`mx-auto w-[680px] h-[620px] font-century-regular text-left overflow-hidden transition-all duration-300 ${
+          cardTransition === "slide-left"
+            ? "animate-slide-left"
+            : cardTransition === "slide-right"
+            ? "animate-slide-right"
+            : ""
+        }`}
+      >
         <PanelHeader active={active} />
-        <div className="px-5 py-4">
+        <div className="px-5 py-4 font-century-regular text-left h-[400px] overflow-y-auto">
           {active.key === "personal" && (
             <PersonalStep
               values={store.personal}
@@ -245,7 +267,7 @@ export default function LoanApplication() {
           )}
         </div>
 
-        <div className="flex items-center justify-between px-5 py-4 gap-4">
+        <div className="flex items-center justify-between px-5 py-4 gap-4 font-century-regular text-left">
           <Button
             onClick={handlePrev}
             disabled={current === 0}
@@ -256,7 +278,7 @@ export default function LoanApplication() {
               borderColor: "rgba(0,0,0,0.08)",
               boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
             }}
-            className="hover:scale-[1.1]"
+            className="hover:scale-[1.1] font-century-regular text-left"
           >
             Previous
           </Button>
@@ -275,7 +297,7 @@ export default function LoanApplication() {
                 color: "#0a0a0a",
                 boxShadow: "0 4px 12px rgba(206,255,102,0.45)",
               }}
-              className="hover:scale-[1.1]"
+              className="hover:scale-[1.1] font-century-regular text-left"
             >
               Next
             </Button>
@@ -289,7 +311,7 @@ export default function LoanApplication() {
                 color: "#ffffff",
                 boxShadow: "0 4px 12px rgba(47,57,92,0.35)",
               }}
-              className="hover:scale-[1.1]"
+              className="hover:scale-[1.1] font-century-regular text-left"
             >
               {submitting ? "Submitting..." : "Submit"}
             </Button>

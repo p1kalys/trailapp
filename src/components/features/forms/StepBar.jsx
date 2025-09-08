@@ -16,7 +16,7 @@ const StepBar = ({ steps = [], current = 0, completed = -1, className = "" }) =>
     <div className={className}>
       <div className="mb-2 grid" style={{ gridTemplateColumns: `repeat(${N},1fr)` }}>
         {steps.map((s) => (
-          <div key={s.key} className="text-center text-sm font-medium text-primary">
+          <div key={s.key} className="text-center text-sm font-century-bold font-medium text-primary">
             {s.label}
           </div>
         ))}

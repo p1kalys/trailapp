@@ -35,7 +35,7 @@ const Marketing = () => {
     <CardShell>
       <div className="mb-4 flex items-center gap-2">
         <span className="inline-flex h-6 w-6 items-center justify-center rounded-md text-blue-500">
-          <Lock className="h-6 w-6" aria-hidden="true" />
+          <Lock className="h-4 w-4 mb-2" aria-hidden="true" />
         </span>
         <h2 className="text-lg font-century-bold text-primary">
           Why Choose Us?
@@ -54,7 +54,7 @@ const Marketing = () => {
                 {Icon ? <Icon className="h-8 w-8" aria-hidden="true" /> : null}
               </div>
               <div className="flex flex-col items-start justify-center">
-                <h3 className="text-sm text-left font-century-regular font-medium">
+                <h3 className="text-sm text-left font-century-regular text-darkGray font-medium">
                   {item.title}
                 </h3>
                 <span className="text-xs text-left font-century-regular text-darkGray/80">

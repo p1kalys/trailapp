@@ -1,5 +1,3 @@
-import { TrendingUp } from "lucide-react";
-
 const StatBadge = ({ icon, value, label }) => {
   const Icon = icon;
   return (
@@ -12,7 +10,7 @@ const StatBadge = ({ icon, value, label }) => {
         {value}
       </div>
 
-      <div className="text-sm font-century-bold text-primary/80">{label}</div>
+      <div className="text-sm font-century-bold text-darkGray/80">{label}</div>
     </div>
   );
 };

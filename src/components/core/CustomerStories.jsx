@@ -31,7 +31,7 @@ const CustomerStories = () => {
     <CardShell>
       <div className="mb-5 flex items-center gap-2">
         <span className="inline-flex h-6 w-6 items-center justify-center text-amber-400">
-          <Star className="h-6 w-6" aria-hidden="true" />
+          <Star className="h-4 w-4 mb-2" aria-hidden="true" />
         </span>
         <h2 className="text-lg font-century-bold text-primary">
           Customer Stories
@@ -44,15 +44,15 @@ const CustomerStories = () => {
             <div className="mt-1 w-1 shrink-0 rounded-full bg-blue-500" />
             <div className="flex-1">
               <Stars count={item.stars ?? 5} />
-              <blockquote className="mt-2 text-sm text-left text-darkGray/80">
+              <blockquote className="mt-2 text-sm font-century-regular text-left text-darkGray/80">
                 “{item.quote}”
               </blockquote>
               <div className="mt-3">
-                <div className="text-sm text-left font-medium text-darkGray">
+                <div className="text-sm text-left font-century-bold font-medium text-darkGray">
                   {item.name}
                 </div>
                 {item.role ? (
-                  <div className="text-xs text-left text-darkGray/70">{item.role}</div>
+                  <div className="text-xs text-left font-century-regular text-darkGray/70">{item.role}</div>
                 ) : null}
               </div>
             </div>

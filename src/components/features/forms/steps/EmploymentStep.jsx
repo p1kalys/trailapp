@@ -5,17 +5,18 @@ export default function EmploymentStep({ values, errors, setValues }) {
   const e = errors || {};
 
   return (
-    <Form layout="vertical">
+    <Form layout="vertical" className="font-century-regular text-left">
       <Row gutter={[4, 4]}>
         <Col span={24}>
           <Form.Item
+            className="font-century-regular text-left"
             label="Street Address *"
             validateStatus={e.streetAddress ? "error" : ""}
             help={e.streetAddress}
           >
             <Input
               value={v.streetAddress}
-              className="w-full shadow border-none"
+              className="w-full shadow border-none font-century-regular text-left"
               onChange={(ev) =>
                 setValues((p) => ({ ...p, streetAddress: ev.target.value }))
               }
@@ -26,13 +27,14 @@ export default function EmploymentStep({ values, errors, setValues }) {
 
         <Col xs={24} sm={8}>
           <Form.Item
+            className="font-century-regular text-left"
             label="City *"
             validateStatus={e.city ? "error" : ""}
             help={e.city}
           >
             <Input
               value={v.city}
-              className="w-full shadow border-none"
+              className="w-full shadow border-none font-century-regular text-left"
               onChange={(ev) =>
                 setValues((p) => ({ ...p, city: ev.target.value }))
               }
@@ -43,13 +45,14 @@ export default function EmploymentStep({ values, errors, setValues }) {
 
         <Col xs={24} sm={8}>
           <Form.Item
+            className="font-century-regular text-left"
             label="State *"
             validateStatus={e.state ? "error" : ""}
             help={e.state}
           >
             <Input
               value={v.state}
-              className="w-full shadow border-none"
+              className="w-full shadow border-none font-century-regular text-left"
               onChange={(ev) =>
                 setValues((p) => ({ ...p, state: ev.target.value }))
               }
@@ -60,13 +63,14 @@ export default function EmploymentStep({ values, errors, setValues }) {
 
         <Col xs={24} sm={8}>
           <Form.Item
+            className="font-century-regular text-left"
             label="ZIP Code *"
             validateStatus={e.zipcode ? "error" : ""}
             help={e.zipcode}
           >
             <Input
               value={v.zipcode}
-              className="w-full shadow border-none"
+              className="w-full shadow border-none font-century-regular text-left"
               onChange={(ev) =>
                 setValues((p) => ({ ...p, zipcode: ev.target.value }))
               }
@@ -77,13 +81,14 @@ export default function EmploymentStep({ values, errors, setValues }) {
 
         <Col xs={24} sm={8}>
           <Form.Item
+            className="font-century-regular text-left"
             label="Employment Status *"
             validateStatus={e.employmentStatus ? "error" : ""}
             help={e.employmentStatus}
           >
             <Select
               placeholder="Select"
-              className="shadow border-none"
+              className="shadow border-none font-century-regular text-left"
               value={v.employmentStatus}
               onChange={(val) =>
                 setValues((p) => ({ ...p, employmentStatus: val }))

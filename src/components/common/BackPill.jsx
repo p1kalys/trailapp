@@ -14,7 +14,7 @@ const BackPill = ({
       <span className="absolute left-[-8px] top-1/2 -translate-y-1/2 grid h-12 w-12 place-items-center rounded-full bg-limeGreen shadow">
         <ArrowLeft className="h-8 w-8 text-white transition" />
       </span>
-      <span className="text-sm font-medium tracking-wide">{text}</span>
+      <span className="text-sm font-medium font-century-regular tracking-wide">{text}</span>
     </button>
   );
 };

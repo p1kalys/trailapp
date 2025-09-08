@@ -224,7 +224,7 @@ export default function LoanApplication() {
       />
 
       <CardShell
-        className={`mx-auto w-[680px] h-[620px] font-century-regular text-left overflow-hidden transition-all duration-300 ${
+        className={`mx-auto w-[680px] h-[610px] font-century-regular text-left overflow-hidden transition-all duration-300 ${
           cardTransition === "slide-left"
             ? "animate-slide-left"
             : cardTransition === "slide-right"
@@ -233,7 +233,7 @@ export default function LoanApplication() {
         }`}
       >
         <PanelHeader active={active} />
-        <div className="px-5 py-4 font-century-regular text-left h-[400px] overflow-y-auto">
+        <div className="px-5 py-4 font-century-regular text-left h-[450px] overflow-y-auto">
           {active.key === "personal" && (
             <PersonalStep
               values={store.personal}

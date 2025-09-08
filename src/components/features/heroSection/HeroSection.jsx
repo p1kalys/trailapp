@@ -6,7 +6,7 @@ import FormFeature from "./FormFeature";
 
 const HeroSection = () => {
   return (
-    <div className="relative flex flex-col items-center justify-center gap-8 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="relative flex flex-col items-center bg-lightGrey/40 justify-center gap-8 py-12 px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col items-center text-center">
         <h2 className="text-3xl font-century-bold font-extrabold text-primary">
           Take Charge of Your Financial Journey
